@@ -1,0 +1,7 @@
+recursive-include tensorquick/config *
+recursive-include tensorquick/resources *
+recursive-include tensorquick/ui *
+include tensorquick/*.qrc
+include requirements.txt
+include README.md
+include LICENSE

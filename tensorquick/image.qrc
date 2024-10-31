@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/icons/app-icon.svg</file>
+        <file>resources/icons/about.svg</file>
+        <file>resources/icons/about-light.svg</file>
+        <file>resources/icons/chevron-right.svg</file>
+        <file>resources/icons/copy.svg</file>
+        <file>resources/icons/copy-light.svg</file>
+        <file>resources/icons/create.svg</file>
+        <file>resources/icons/deploy.svg</file>
+        <file>resources/icons/download.svg</file>
+        <file>resources/icons/minus.svg</file>
+        <file>resources/icons/plus.svg</file>
+        <file>resources/icons/model.svg</file>
+        <file>resources/icons/model-light.svg</file>
+        <file>resources/icons/save.svg</file>
+        <file>resources/icons/save-light.svg</file>
+        <file>resources/icons/shortcut.svg</file>
+        <file>resources/icons/shortcut-light.svg</file>
+        <file>resources/icons/settings.svg</file>
+        <file>resources/icons/x.svg</file>
+        <file>resources/icons/maximized.svg</file>
+        <file>resources/icons/link.svg</file>
+        <file>resources/icons/refresh.svg</file>
+        <file>resources/icons/check.svg</file>
+        <file>resources/icons/trash.svg</file>
+        <file>resources/icons/sun.svg</file>
+        <file>resources/icons/moon.svg</file>
+        <file>resources/icons/dropdown.svg</file>
+        <file>resources/icons/dropdown-light.svg</file>
+
+        <file>resources/images/flux.1-dev.png</file>
+        <file>resources/images/flux.1-schnell.png</file>
+        <file>resources/images/stable-diffusion-xl.png</file>
+        <file>resources/images/model-preview-placeholder.png</file>
+    </qresource>
+</RCC>
