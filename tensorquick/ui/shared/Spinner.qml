@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import Qt5Compat.GraphicalEffects
 
 // Loading spinner (macOS style)

@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import Qt5Compat.GraphicalEffects
@@ -151,7 +151,6 @@ ApplicationWindow {
                 if (isLoading) {
                     confirmExitDialog.open()
                 } else {
-                    sessionSettings.save()
                     Qt.quit()
                 }
             } else if (event.key === Qt.Key_Return && isInferenceMode) {
@@ -160,6 +159,7 @@ ApplicationWindow {
                     window.height = expandedHeight
                 }
             }
+            sessionSettings.save()
         }        // macOS style title bar
 
         Rectangle {
@@ -203,8 +203,8 @@ ApplicationWindow {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
+                            sessionSettings.save()
                             if (isLoading || (modelBuilder.loading)) {
-                                sessionSettings.save()
                                 confirmExitDialog.open()
                             } else {
                                 Qt.quit()
