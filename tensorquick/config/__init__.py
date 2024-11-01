@@ -16,8 +16,8 @@ def load_config(config_path):
     return config
 
 
-default_settings_path = os.getenv("BUNCHA_DEFAULT_CONFIG_PATH") or Path(__file__).parent / "default.yaml"
+default_settings_path = os.getenv("TENSOR_QUICK_DEFAULT_CONFIG_PATH") or Path(__file__).parent / "default.yaml"
 default_settings = load_config(default_settings_path)
 
-session_settings_path = os.getenv("BUNCHA_CONFIG_PATH") or Path("~/.tensorquick.yaml").expanduser()
+session_settings_path = os.getenv("TENSOR_QUICK_CONFIG_PATH") or Path("~/.tensorquick.yaml").expanduser()
 session_settings = load_config(session_settings_path)

@@ -91,13 +91,13 @@ with flux_image.imports():
 
 MINUTES = 60  # seconds
 NUM_INFERENCE_STEPS = 5  # use ~50 for [dev], smaller for [schnell]
-BUNCHA_GPU_TYPE = "H100"
+TENSOR_QUICK_GPU_TYPE = "H100"
 
 class GenerationRequest(BaseModel):
     prompt: str
 
 @app.cls(
-    gpu=BUNCHA_GPU_TYPE,
+    gpu=TENSOR_QUICK_GPU_TYPE,
     container_idle_timeout=1 * MINUTES,
     timeout=1 * MINUTES,
     volumes={  # add Volumes to store serializable compilation artifacts, see section on torch.compile below

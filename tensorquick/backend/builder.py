@@ -99,7 +99,7 @@ class ModelBuilder(QObject):
             gpu_type = model.get("gpu_type", "A100-40GB")
             model["gpu_type"] = gpu_type
             envs = {
-                "BUNCHA_GPU_TYPE": gpu_type
+                "TENSOR_QUICK_GPU_TYPE": gpu_type
             }
             self._worker = ModelDeployWorker(model, envs)
             self._worker.finished.connect(self._onDeploymentCompleted)
@@ -180,8 +180,8 @@ class ModelDeployWorker(QThread):
             with open(self._deploy_script, 'r') as script_file:
                 script_lines = script_file.readlines()
 
-            # Regex to find keys in the format BUNCHA_*="*"
-            pattern = r'^\s*(BUNCHA_[^=]+)\s*=\s*"([^"]*)"\s*$'
+            # Regex to find keys in the format TENSOR_QUICK_*="*"
+            pattern = r'^\s*(TENSOR_QUICK_[^=]+)\s*=\s*"([^"]*)"\s*$'
             updated_lines = []
 
             # Iterate through each line to find and update values

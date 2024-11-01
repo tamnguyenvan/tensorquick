@@ -69,13 +69,13 @@ with sdxl_image.imports():
 #
 # To avoid excessive cold-starts, we set the idle timeout to 240 seconds, meaning once a GPU has loaded the model it will stay
 # online for 4 minutes before spinning down. This can be adjusted for cost/experience trade-offs.
-BUNCHA_GPU_TYPE = "A10G"
+TENSOR_QUICK_GPU_TYPE = "A10G"
 
 class GenerationRequest(BaseModel):
     prompt: str
 
 @app.cls(
-    gpu=BUNCHA_GPU_TYPE,
+    gpu=TENSOR_QUICK_GPU_TYPE,
     container_idle_timeout=60,
     image=sdxl_image
 )
