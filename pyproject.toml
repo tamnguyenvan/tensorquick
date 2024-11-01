@@ -67,3 +67,17 @@ python-tag = "py39"
 
 [tool.setuptools.dynamic]
 version = {attr = "tensorquick.__version__"}
+
+[tool.setuptools.package-data]
+tensorquick = [
+    "config/*",
+    "resources/*",
+    "ui/*",
+    "*.qrc",
+]
+
+[tool.setuptools.data-files]
+"." = [
+    "README.md",
+    "LICENSE",
+]
