@@ -29,27 +29,27 @@
         <file>resources/icons/dropdown.svg</file>
         <file>resources/icons/dropdown-light.svg</file>
 
-        <file>resources/ui/app/Main.qml</file>
+        <file>ui/Main.qml</file>
 
-        <file>resources/ui/app/ImageDisplay.qml</file>
-        <file>resources/ui/app/Inference.qml</file>
-        <file>resources/ui/app/InputField.qml</file>
-        <file>resources/ui/app/TextWarning.qml</file>
-        <file>resources/ui/app/Training.qml</file>
+        <file>ui/app/ImageDisplay.qml</file>
+        <file>ui/app/Inference.qml</file>
+        <file>ui/app/InputField.qml</file>
+        <file>ui/app/TextWarning.qml</file>
+        <file>ui/app/Training.qml</file>
 
-        <file>resources/ui/settings/SettingsModal.qml</file>
-        <file>resources/ui/settings/Sidebar.qml</file>
-        <file>resources/ui/settings/content/About.qml</file>
-        <file>resources/ui/settings/content/ContentModel.qml</file>
-        <file>resources/ui/settings/content/ContentShortcut.qml</file>
-        <file>resources/ui/settings/content/CurrentModel.qml</file>
-        <file>resources/ui/settings/content/DeployedModels.qml</file>
-        <file>resources/ui/settings/content/ModelGallery.qml</file>
+        <file>ui/settings/SettingsModal.qml</file>
+        <file>ui/settings/Sidebar.qml</file>
+        <file>ui/settings/content/About.qml</file>
+        <file>ui/settings/content/ContentModel.qml</file>
+        <file>ui/settings/content/ContentShortcut.qml</file>
+        <file>ui/settings/content/CurrentModel.qml</file>
+        <file>ui/settings/content/DeployedModels.qml</file>
+        <file>ui/settings/content/ModelGallery.qml</file>
 
-        <file>resources/ui/settings/shared/ConfirmDialog.qml</file>
-        <file>resources/ui/settings/shared/ControlButton.qml</file>
-        <file>resources/ui/settings/shared/MacOSGroupBox.qml</file>
-        <file>resources/ui/settings/shared/PrimaryButton.qml</file>
-        <file>resources/ui/settings/shared/Spinner.qml</file>
+        <file>ui/shared/ConfirmDialog.qml</file>
+        <file>ui/shared/ControlButton.qml</file>
+        <file>ui/shared/MacOSGroupBox.qml</file>
+        <file>ui/shared/PrimaryButton.qml</file>
+        <file>ui/shared/Spinner.qml</file>
     </qresource>
 </RCC>

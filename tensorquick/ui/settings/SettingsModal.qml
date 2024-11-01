@@ -3,6 +3,7 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
+import "./content"
 
 ApplicationWindow {
     id: settingsModal

@@ -3,6 +3,9 @@ import QtQuick.Controls.Basic
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import Qt5Compat.GraphicalEffects
+import "./app"
+import "./settings"
+import "./shared"
 
 ApplicationWindow {
     id: window
