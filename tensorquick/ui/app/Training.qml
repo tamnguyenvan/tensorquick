@@ -6,7 +6,6 @@ import Qt5Compat.GraphicalEffects
 
 Rectangle {
     id: root
-    // anchors.fill: parent
     width: parent.width
     height: parent.height - 1
     color: "transparent"
@@ -33,44 +32,50 @@ Rectangle {
         id: scrollView
         anchors.fill: parent
         clip: true
+        padding: 24  // Add padding to ScrollView
 
         Item {
-            width: scrollView.width
+            id: contentContainer
+            width: Math.min(scrollView.width - 48, 800)  // Maximum width of 800
+            anchors.horizontalCenter: parent.horizontalCenter
             implicitHeight: contentLayout.implicitHeight
 
             ColumnLayout {
                 id: contentLayout
-                Layout.alignment: Qt.AlignHCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                // Set a maximum width for the form
-                width: Math.min(parent.width - 48, 800)
-
+                width: parent.width
                 spacing: 32
 
-                // Header
-                ColumnLayout {
+                // Header with better centering
+                Item {
                     Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignHCenter
-                    spacing: 8
+                    Layout.preferredHeight: headerLayout.height
+                    Layout.topMargin: 16
 
-                    Text {
-                        text: "Create Training Job"
-                        font.pixelSize: 24
-                        font.weight: Font.Medium
-                        color: textColor
-                    }
+                    ColumnLayout {
+                        id: headerLayout
+                        anchors.centerIn: parent
+                        spacing: 8
 
-                    Text {
-                        text: "Configure your model training parameters"
-                        font.pixelSize: 14
-                        color: labelColor
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: "Create Training Job"
+                            font.pixelSize: 24
+                            font.weight: Font.Medium
+                            color: textColor
+                        }
+
+                        Text {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: "Configure your model training parameters"
+                            font.pixelSize: 14
+                            color: labelColor
+                        }
                     }
                 }
 
                 // Form Grid
                 GridLayout {
                     Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignHCenter
                     columnSpacing: 24
                     rowSpacing: 24
                     columns: 2
@@ -361,8 +366,8 @@ Rectangle {
                 // Submit Button Section
                 Item {
                     Layout.fillWidth: true
-                    // Layout.topMargin: 8
-                    Layout.preferredHeight: 48
+                    Layout.preferredHeight: 64
+                    Layout.topMargin: 8
 
                     Button {
                         anchors.centerIn: parent
