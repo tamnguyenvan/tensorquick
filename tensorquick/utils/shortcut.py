@@ -8,20 +8,20 @@ import stat
 # Global configuration
 APP_CONFIG = {
     # App identity
-    'DISPLAY_NAME': 'Tensor Quick',  # Display name shown to users
-    'APP_NAME': 'tensorquick',      # Technical name for files and commands
-    'MODULE_NAME': 'tensorquick.main',  # Python module to run
-    'GENERIC_NAME': 'Tensor Quick Application',  # Generic name for Linux .desktop
-    'COMMENT': 'PySide6 Tensor Quick Application',  # Description for Linux .desktop
+    "DISPLAY_NAME": "Tensor Quick",  # Display name shown to users
+    "APP_NAME": "tensorquick",      # Technical name for files and commands
+    "MODULE_NAME": "tensorquick.main",  # Python module to run
+    "GENERIC_NAME": "Tensor Quick",  # Generic name for Linux .desktop
+    "COMMENT": "Tensor Quick is a free, open-source, and multi-platform desktop application that helps you train and use AI models easily.",  # Description for Linux .desktop
 
     # Paths and resources
-    'ICON_PATH': str(Path(__file__).parents[1] / "resources" / "icons" / "app-icon.png"),
+    "ICON_PATH": str(Path(__file__).parents[1] / "resources" / "icons" / "app-icon.png"),
 
     # Categories and window properties
-    'CATEGORIES': 'Utility;Development;',
-    'WM_CLASS': 'Tensor Quick',  # Window manager class for Linux
+    "CATEGORIES": "Utility;Development;",
+    "WM_CLASS": "Tensor Quick",  # Window manager class for Linux
     # Version info
-    'VERSION': '0.1.0'
+    "VERSION": "0.1.0"
 }
 
 def get_desktop_path():
@@ -38,15 +38,15 @@ def create_windows_shortcut(desktop_path):
     try:
         import win32com.client
         shell = win32com.client.Dispatch("WScript.Shell")
-        shortcut_path = os.path.join(desktop_path, f"{APP_CONFIG['DISPLAY_NAME']}.lnk")
+        shortcut_path = os.path.join(desktop_path, f"{APP_CONFIG["DISPLAY_NAME"]}.lnk")
         shortcut = shell.CreateShortCut(shortcut_path)
 
         # Get Python executable path
         python_path = sys.executable.replace("python.exe", "pythonw.exe")
 
         shortcut.Targetpath = python_path
-        shortcut.Arguments = f"-m {APP_CONFIG['MODULE_NAME']}"
-        shortcut.IconLocation = APP_CONFIG['ICON_PATH'].replace("app-icon.png", "app-icon.ico")
+        shortcut.Arguments = f"-m {APP_CONFIG["MODULE_NAME"]}"
+        shortcut.IconLocation = APP_CONFIG["ICON_PATH"].replace("app-icon.png", "app-icon.ico")
         shortcut.WorkingDirectory = os.path.dirname(python_path)
         shortcut.save()
         print(f"Windows shortcut created at: {shortcut_path}")
@@ -58,32 +58,32 @@ def create_windows_shortcut(desktop_path):
 def create_linux_shortcut():
     """Create a Linux .desktop file in the applications directory."""
     try:
-        # Create applications directory if it doesn't exist
+        # Create applications directory if it doesn"t exist
         apps_dir = Path.home() / ".local" / "share" / "applications"
         apps_dir.mkdir(parents=True, exist_ok=True)
 
-        desktop_file = apps_dir / f"{APP_CONFIG['APP_NAME']}.desktop"
+        desktop_file = apps_dir / f"{APP_CONFIG["APP_NAME"]}.desktop"
         python_path = sys.executable
 
-        # Get absolute path to the script's directory
+        # Get absolute path to the script"s directory
         script_dir = os.path.dirname(os.path.abspath(__file__))
 
         desktop_entry = f"""[Desktop Entry]
-Version={APP_CONFIG['VERSION']}
+Version={APP_CONFIG["VERSION"]}
 Type=Application
-Name={APP_CONFIG['DISPLAY_NAME']}
-GenericName={APP_CONFIG['GENERIC_NAME']}
-Comment={APP_CONFIG['COMMENT']}
-Exec={python_path} -m {APP_CONFIG['MODULE_NAME']}
-Icon={APP_CONFIG['ICON_PATH']}
+Name={APP_CONFIG["DISPLAY_NAME"]}
+GenericName={APP_CONFIG["GENERIC_NAME"]}
+Comment={APP_CONFIG["COMMENT"]}
+Exec={python_path} -m {APP_CONFIG["MODULE_NAME"]}
+Icon={APP_CONFIG["ICON_PATH"]}
 Terminal=false
-Categories={APP_CONFIG['CATEGORIES']}
+Categories={APP_CONFIG["CATEGORIES"]}
 StartupNotify=true
-StartupWMClass={APP_CONFIG['WM_CLASS']}
+StartupWMClass={APP_CONFIG["WM_CLASS"]}
 Path={script_dir}
 """
 
-        with open(desktop_file, 'w') as f:
+        with open(desktop_file, "w") as f:
             f.write(desktop_entry)
 
         # Make the .desktop file executable
@@ -91,7 +91,7 @@ Path={script_dir}
 
         # Update desktop database
         try:
-            subprocess.run(['update-desktop-database', str(apps_dir)], check=True)
+            subprocess.run(["update-desktop-database", str(apps_dir)], check=True)
         except (subprocess.SubprocessError, FileNotFoundError):
             print("Note: Could not update desktop database. The shortcut may take effect after restart.")
 
@@ -101,7 +101,7 @@ Path={script_dir}
         print(f"Error creating Linux shortcut: {e}")
         return False
 
-def create_macos_app():
+def create_macos_shortcut():
     """Create a proper macOS .app bundle instead of a .command file"""
     try:
         import os
@@ -109,7 +109,7 @@ def create_macos_app():
         from pathlib import Path
 
         # Create app bundle structure
-        app_name = APP_CONFIG['DISPLAY_NAME']
+        app_name = APP_CONFIG["DISPLAY_NAME"]
         bundle_dir = Path(get_desktop_path()) / f"{app_name}.app"
         contents_dir = bundle_dir / "Contents"
         macos_dir = contents_dir / "MacOS"
@@ -127,11 +127,11 @@ def create_macos_app():
     <key>CFBundleName</key>
     <string>{app_name}</string>
     <key>CFBundleDisplayName</key>
-    <string>{APP_CONFIG['DISPLAY_NAME']}</string>
+    <string>{APP_CONFIG["DISPLAY_NAME"]}</string>
     <key>CFBundleIdentifier</key>
-    <string>com.{APP_CONFIG['APP_NAME']}</string>
+    <string>com.{APP_CONFIG["APP_NAME"]}</string>
     <key>CFBundleVersion</key>
-    <string>{APP_CONFIG['VERSION']}</string>
+    <string>{APP_CONFIG["VERSION"]}</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleExecutable</key>
@@ -145,8 +145,8 @@ def create_macos_app():
         # Create launcher script
         launcher_script = f"""#!/bin/bash
 cd "$(dirname "$0")"
-export PYTHONPATH="{os.path.dirname(os.path.dirname(APP_CONFIG['MODULE_NAME'].replace('.', '/')))}"
-"{sys.executable}" -m {APP_CONFIG['MODULE_NAME']}
+export PYTHONPATH="{os.path.dirname(os.path.dirname(APP_CONFIG["MODULE_NAME"].replace(".", "/")))}"
+"{sys.executable}" -m {APP_CONFIG["MODULE_NAME"]}
 """
 
         launcher_path = macos_dir / "launcher"
@@ -157,10 +157,10 @@ export PYTHONPATH="{os.path.dirname(os.path.dirname(APP_CONFIG['MODULE_NAME'].re
         os.chmod(launcher_path, 0o755)
 
         # Copy icon if it exists
-        if os.path.exists(APP_CONFIG['ICON_PATH']):
+        if os.path.exists(APP_CONFIG["ICON_PATH"]):
             import shutil
-            icon_name = os.path.basename(APP_CONFIG['ICON_PATH'])
-            shutil.copy2(APP_CONFIG['ICON_PATH'], resources_dir / icon_name)
+            icon_name = os.path.basename(APP_CONFIG["ICON_PATH"])
+            shutil.copy2(APP_CONFIG["ICON_PATH"], resources_dir / icon_name)
 
         print(f"macOS app bundle created at: {bundle_dir}")
         return True
@@ -172,8 +172,8 @@ export PYTHONPATH="{os.path.dirname(os.path.dirname(APP_CONFIG['MODULE_NAME'].re
 def create_shortcut():
     """Create desktop shortcut based on the current operating system."""
     # Ensure icon exists
-    if not os.path.exists(APP_CONFIG['ICON_PATH']):
-        print(f"Warning: Icon file not found at {APP_CONFIG['ICON_PATH']}")
+    if not os.path.exists(APP_CONFIG["ICON_PATH"]):
+        print(f"Warning: Icon file not found at {APP_CONFIG["ICON_PATH"]}")
 
     # Create shortcut based on OS
     system = platform.system()
