@@ -42,11 +42,11 @@ def create_windows_shortcut(desktop_path):
         shortcut = shell.CreateShortCut(shortcut_path)
 
         # Get Python executable path
-        python_path = sys.executable
+        python_path = sys.executable.replace("python.exe", "pythonw.exe")
 
         shortcut.Targetpath = python_path
         shortcut.Arguments = f"-m {APP_CONFIG['MODULE_NAME']}"
-        shortcut.IconLocation = APP_CONFIG['ICON_PATH']
+        shortcut.IconLocation = APP_CONFIG['ICON_PATH'].replace("app-icon.png", "app-icon.ico")
         shortcut.WorkingDirectory = os.path.dirname(python_path)
         shortcut.save()
         print(f"Windows shortcut created at: {shortcut_path}")
