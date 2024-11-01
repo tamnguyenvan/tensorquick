@@ -101,25 +101,72 @@ Path={script_dir}
         print(f"Error creating Linux shortcut: {e}")
         return False
 
-def create_macos_shortcut(desktop_path):
-    """Create a macOS .command shortcut."""
+def create_macos_app():
+    """Create a proper macOS .app bundle instead of a .command file"""
     try:
-        command_file = os.path.join(desktop_path, f"{APP_CONFIG['DISPLAY_NAME']}.command")
-        python_path = sys.executable
+        import os
+        import sys
+        from pathlib import Path
 
-        with open(command_file, 'w') as f:
-            f.write(f"""#!/bin/bash
+        # Create app bundle structure
+        app_name = APP_CONFIG['DISPLAY_NAME']
+        bundle_dir = Path(get_desktop_path()) / f"{app_name}.app"
+        contents_dir = bundle_dir / "Contents"
+        macos_dir = contents_dir / "MacOS"
+        resources_dir = contents_dir / "Resources"
+
+        # Create directories
+        for dir_path in [contents_dir, macos_dir, resources_dir]:
+            dir_path.mkdir(parents=True, exist_ok=True)
+
+        # Create Info.plist
+        info_plist = f"""<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key>
+    <string>{app_name}</string>
+    <key>CFBundleDisplayName</key>
+    <string>{APP_CONFIG['DISPLAY_NAME']}</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.{APP_CONFIG['APP_NAME']}</string>
+    <key>CFBundleVersion</key>
+    <string>{APP_CONFIG['VERSION']}</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleExecutable</key>
+    <string>launcher</string>
+</dict>
+</plist>"""
+
+        with open(contents_dir / "Info.plist", "w") as f:
+            f.write(info_plist)
+
+        # Create launcher script
+        launcher_script = f"""#!/bin/bash
 cd "$(dirname "$0")"
-"{python_path}" -m {APP_CONFIG['MODULE_NAME']}
-""")
+export PYTHONPATH="{os.path.dirname(os.path.dirname(APP_CONFIG['MODULE_NAME'].replace('.', '/')))}"
+"{sys.executable}" -m {APP_CONFIG['MODULE_NAME']}
+"""
 
-        # Make the command file executable
-        os.chmod(command_file, 0o755)
+        launcher_path = macos_dir / "launcher"
+        with open(launcher_path, "w") as f:
+            f.write(launcher_script)
 
-        print(f"macOS shortcut created at: {command_file}")
+        # Make launcher executable
+        os.chmod(launcher_path, 0o755)
+
+        # Copy icon if it exists
+        if os.path.exists(APP_CONFIG['ICON_PATH']):
+            import shutil
+            icon_name = os.path.basename(APP_CONFIG['ICON_PATH'])
+            shutil.copy2(APP_CONFIG['ICON_PATH'], resources_dir / icon_name)
+
+        print(f"macOS app bundle created at: {bundle_dir}")
         return True
+
     except Exception as e:
-        print(f"Error creating macOS shortcut: {e}")
+        print(f"Error creating macOS app bundle: {e}")
         return False
 
 def create_shortcut():
