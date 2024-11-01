@@ -31,7 +31,7 @@ setup(
     # Metadata
     author="Tam Nguyen",
     author_email="tamnv.work@gmail.com",
-    description="Tensor Quick is not just another deployment platform - it's a product crafted with dedication to make AI accessible and enjoyable.",
+    description="Tensor Quick is a free, open-source, and multi-platform desktop application that helps you train and use AI models easily",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
     url="https://github.com/tamnguyenvan/tensorquick",
@@ -46,5 +46,5 @@ setup(
         "Programming Language :: Python :: 3 :: Only",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires='>=3.9',
 )

@@ -42,7 +42,7 @@ Tensor Quick can be installed using pip, the Python package installer. The recom
 - On macOS or Linux: Open a Terminal window to run Conda commands.
 
 ```bash
-conda create -n tensorquick python=3.9
+conda create -n tensorquick python=3.9 -y
 ```
 2. Activate the Tensor Quick environment:
 ```bash
