@@ -1,6 +1,5 @@
 app: tensorquick
 save_dir: ~/Pictures/Tensor Quick
-version: 0.1.0
 models:
 - code_name: flux-1-dev
   description: FLUX.1 [dev] is a 12 billion parameter rectified flow transformer capable

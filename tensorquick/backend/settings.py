@@ -11,6 +11,7 @@ from tensorquick.config import (
 )
 from tensorquick.utils.general import find_index
 from tensorquick.utils.shortcut import create_shortcut
+from tensorquick import __version__
 
 class DefaultSettings(QObject):
     versionChanged = Signal(str)
@@ -22,7 +23,7 @@ class DefaultSettings(QObject):
 
     @Property(str, notify=versionChanged)
     def version(self):
-        return self._default_settings.get("version", "unknown")
+        return __version__
 
     @Slot()
     def save(self):

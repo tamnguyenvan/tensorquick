@@ -34,14 +34,14 @@ Rectangle {
     function setSelectedModel(models, currentModel) {
         // Case 1: Empty models array
         if (!models || models.length === 0) {
-            console.log("Case 1: Empty models")
+            // console.log("Case 1: Empty models")
             selectedModel = { model: {}, index: -1 }
             return
         }
 
         // Case 2: Models exist but currentModel is null
         if (!currentModel) {
-            console.log("Case 2: Current model is null")
+            // console.log("Case 2: Current model is null")
             selectedModel = { model: models[0], index: 0 }
             return
         }
@@ -50,7 +50,7 @@ Rectangle {
         if (currentModel.code_name) {
             for (let i = 0; i < models.length; i++) {
                 if (models[i].code_name === currentModel.code_name) {
-                    console.log("Case 3: Found matching model:", models[i].code_name)
+                    // console.log("Case 3: Found matching model:", models[i].code_name)
                     selectedModel = {
                         model: models[i],
                         index: i
@@ -61,7 +61,7 @@ Rectangle {
         }
 
         // Case 4: No match found
-        console.log("Case 4: No match found")
+        // console.log("Case 4: No match found")
         selectedModel = { model: models[0], index: 0 }
     }
 

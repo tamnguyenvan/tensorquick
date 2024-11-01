@@ -1,0 +1,69 @@
+[build-system]
+# Specifies the build system requirements
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+# Basic project metadata
+name = "tensorquick"
+dynamic = ["version"]
+description = "Tensor Quick is a free, open-source, and multi-platform desktop application that helps you train and use AI models easily"  # Short description of the package
+authors = [
+    { name = "Tam Nguyen", email = "tamnv.work@gmail.com" },
+]
+keywords = ["ai", "machine learning", "deep learning", "model training", "inference"]
+
+# Classifiers to help users and tools understand the package
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: OS Independent",
+]
+
+readme = "README.md"
+requires-python = ">=3.9"
+
+# Main dependencies of the project
+dependencies = [
+    "PySide6>=6.2.0,<7",
+    "loguru>=0.7.2,<1",
+    "requests>=2.32.3,<3",
+    "Pillow>=11.0.0,<12",
+    "modal>=0.64.232,<1",
+    "pyyaml>=6.0.2,<7",
+]
+
+[project.urls]
+homepage = "https://github.com/tamnguyenvan/tensorquick"
+repository = "https://github.com/tamnguyenvan/tensorquick"
+documentation = "https://github.com/tamnguyenvan/tensorquick"
+issue_tracker = "https://github.com/tamnguyenvan/tensorquick/issues"
+
+# Optional dependencies for different environments
+[project.optional-dependencies]
+win32 = ["pywin32>=225"]  # Windows-specific dependencies
+dev = [  # Development dependencies
+    "pytest>=6.0",
+    "pytest-cov",
+    "flake8",
+    "black",
+]
+
+[project.scripts]
+# Console script entry point
+tensorquick = "tensorquick.main:main"
+
+[tool.distutils.bdist_wheel]
+python-tag = "py39"
+
+[tool.setuptools.dynamic]
+version = {attr = "tensorquick.__version__"}

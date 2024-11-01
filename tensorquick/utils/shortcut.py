@@ -21,7 +21,7 @@ APP_CONFIG = {
     "CATEGORIES": "Utility;Development;",
     "WM_CLASS": "Tensor Quick",  # Window manager class for Linux
     # Version info
-    "VERSION": "0.1.0"
+    "VERSION": "0.1.5"
 }
 
 def get_desktop_path():
@@ -38,14 +38,14 @@ def create_windows_shortcut(desktop_path):
     try:
         import win32com.client
         shell = win32com.client.Dispatch("WScript.Shell")
-        shortcut_path = os.path.join(desktop_path, f"{APP_CONFIG["DISPLAY_NAME"]}.lnk")
+        shortcut_path = os.path.join(desktop_path, f"{APP_CONFIG['DISPLAY_NAME']}.lnk")
         shortcut = shell.CreateShortCut(shortcut_path)
 
         # Get Python executable path
         python_path = sys.executable.replace("python.exe", "pythonw.exe")
 
         shortcut.Targetpath = python_path
-        shortcut.Arguments = f"-m {APP_CONFIG["MODULE_NAME"]}"
+        shortcut.Arguments = f"-m {APP_CONFIG['MODULE_NAME']}"
         shortcut.IconLocation = APP_CONFIG["ICON_PATH"].replace("app-icon.png", "app-icon.ico")
         shortcut.WorkingDirectory = os.path.dirname(python_path)
         shortcut.save()
@@ -62,7 +62,7 @@ def create_linux_shortcut():
         apps_dir = Path.home() / ".local" / "share" / "applications"
         apps_dir.mkdir(parents=True, exist_ok=True)
 
-        desktop_file = apps_dir / f"{APP_CONFIG["APP_NAME"]}.desktop"
+        desktop_file = apps_dir / f"{APP_CONFIG['APP_NAME']}.desktop"
         python_path = sys.executable
 
         # Get absolute path to the script"s directory
@@ -146,7 +146,7 @@ def create_macos_shortcut():
         launcher_script = f"""#!/bin/bash
 cd "$(dirname "$0")"
 export PYTHONPATH="{os.path.dirname(os.path.dirname(APP_CONFIG["MODULE_NAME"].replace(".", "/")))}"
-"{sys.executable}" -m {APP_CONFIG["MODULE_NAME"]}
+"{sys.executable}" -m {APP_CONFIG['MODULE_NAME']}
 """
 
         launcher_path = macos_dir / "launcher"
@@ -173,7 +173,7 @@ def create_shortcut():
     """Create desktop shortcut based on the current operating system."""
     # Ensure icon exists
     if not os.path.exists(APP_CONFIG["ICON_PATH"]):
-        print(f"Warning: Icon file not found at {APP_CONFIG["ICON_PATH"]}")
+        print(f"Warning: Icon file not found at {APP_CONFIG['ICON_PATH']}")
 
     # Create shortcut based on OS
     system = platform.system()
