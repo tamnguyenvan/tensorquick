@@ -209,37 +209,37 @@ class ImageGeneratorWorker(QThread):
             self._status = WorkerStatus.RUNNING
             logger.info(f"Starting image generation for prompt: {self._prompt}")
 
-            # response, image_bytes = self._inference(self._prompt)
-            # if not image_bytes:
-            #     self._status = WorkerStatus.ERROR
-            #     self.finished.emit(GenerationResult(False, "", "Failed to inference"))
-            #     return
+            response, image_bytes = self._inference(self._prompt)
+            if not image_bytes:
+                self._status = WorkerStatus.ERROR
+                self.finished.emit(GenerationResult(False, "", "Failed to inference"))
+                return
 
-            # # Get file extension from response content-type
-            # if response and 'content-type' in response.headers:
-            #     extension = self._get_extension_from_mime(response.headers['content-type'])
-            # else:
-            #     extension = '.jpg'  # Default extension
-            #     logger.warning("Content-type not found in response, using default extension .jpg")
+            # Get file extension from response content-type
+            if response and 'content-type' in response.headers:
+                extension = self._get_extension_from_mime(response.headers['content-type'])
+            else:
+                extension = '.jpg'  # Default extension
+                logger.warning("Content-type not found in response, using default extension .jpg")
 
-            # # Create temp directory if it doesn't exist
-            # temp_dir = tempfile.gettempdir()
-            # if not os.path.exists(temp_dir):
-            #     os.makedirs(temp_dir, exist_ok=True)
+            # Create temp directory if it doesn't exist
+            temp_dir = tempfile.gettempdir()
+            if not os.path.exists(temp_dir):
+                os.makedirs(temp_dir, exist_ok=True)
 
-            # # Generate unique filename with proper extension
-            # app_name = default_settings.get("app")
-            # timestamp = int(datetime.now().timestamp())
-            # temp_file = f"{self._prompt}-{app_name}-{timestamp}{extension}"
-            # generated_image_path = os.path.join(temp_dir, temp_file)
+            # Generate unique filename with proper extension
+            app_name = default_settings.get("app")
+            timestamp = int(datetime.now().timestamp())
+            temp_file = f"{self._prompt}-{app_name}-{timestamp}{extension}"
+            generated_image_path = os.path.join(temp_dir, temp_file)
 
-            # # Save the image
-            # with open(generated_image_path, "wb") as f:
-            #     f.write(image_bytes)
+            # Save the image
+            with open(generated_image_path, "wb") as f:
+                f.write(image_bytes)
 
-            import time
-            time.sleep(2)
-            generated_image_path = "/home/tamnv/Downloads/ohmyicon-a-plum.jpg"
+            # import time
+            # time.sleep(2)
+            # generated_image_path = "/home/tamnv/Downloads/ohmyicon-a-plum.jpg"
             self._status = WorkerStatus.COMPLETED
             self.finished.emit(GenerationResult(True, generated_image_path, ""))
 

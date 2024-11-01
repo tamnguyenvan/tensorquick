@@ -15,7 +15,7 @@ APP_CONFIG = {
     'COMMENT': 'PySide6 Tensor Quick Application',  # Description for Linux .desktop
 
     # Paths and resources
-    'ICON_PATH': str(Path(__file__).parents[1] / "resources" / "icons" / "app-icon.ico"),
+    'ICON_PATH': str(Path(__file__).parents[1] / "resources" / "icons" / "app-icon.png"),
 
     # Categories and window properties
     'CATEGORIES': 'Utility;Development;',

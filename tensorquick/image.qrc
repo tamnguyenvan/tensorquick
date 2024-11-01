@@ -28,10 +28,5 @@
         <file>resources/icons/moon.svg</file>
         <file>resources/icons/dropdown.svg</file>
         <file>resources/icons/dropdown-light.svg</file>
-
-        <file>resources/images/flux.1-dev.png</file>
-        <file>resources/images/flux.1-schnell.png</file>
-        <file>resources/images/stable-diffusion-xl.png</file>
-        <file>resources/images/model-preview-placeholder.png</file>
     </qresource>
 </RCC>

@@ -186,7 +186,8 @@ Rectangle {
                                 Image {
                                     anchors.fill: parent
                                     anchors.margins: 4
-                                    source: modelData && modelData.preview ? modelData.preview : "qrc:/resources/images/model-preview-placeholder.png"
+                                    // source: modelData && modelData.preview ? modelData.preview : "qrc:/resources/images/model-preview-placeholder.png"
+                                    source: modelData && modelData.preview ? modelData.preview : "image:/model-preview-placeholder.png"
                                     fillMode: Image.PreserveAspectCrop
                                     smooth: true
                                     mipmap: true

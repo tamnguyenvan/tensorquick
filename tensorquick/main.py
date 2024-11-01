@@ -9,6 +9,7 @@ from tensorquick.backend.pipeline import InferencePipeline
 from tensorquick.backend.builder import ModelBuilder
 from tensorquick.backend.settings import DefaultSettings, SessionSettings
 from tensorquick.backend.clipboard import ClipboardModel
+from tensorquick.backend.image_provider import ImageProvider
 from tensorquick.compile_resources import maybe_compile
 
 maybe_compile()
@@ -36,12 +37,14 @@ def main() -> int:
         default_settings = DefaultSettings()
         session_settings = SessionSettings()
         clipboard = ClipboardModel()
+        image_provider = ImageProvider()
 
         engine.rootContext().setContextProperty("inferencePipeline", inference_pipeline)
         engine.rootContext().setContextProperty("modelBuilder", model_builder)
         engine.rootContext().setContextProperty("defaultSettings", default_settings)
         engine.rootContext().setContextProperty("sessionSettings", session_settings)
         engine.rootContext().setContextProperty("clipboard", clipboard)
+        engine.addImageProvider("tensorquick", image_provider)
 
         # Load the main QML file
         qml_file = Path(__file__).parent / "ui/Main.qml"
