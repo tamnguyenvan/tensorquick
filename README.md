@@ -1,7 +1,6 @@
 
 <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 50px;">
   <img src="./tensorquick/resources/icons/app-icon.svg" alt="Tensor Quick" width="250"/>
-  <span style="font-size: 120px; margin-left: 20px;">Tensor Quick</span>
 </div>
 
 

@@ -28,18 +28,11 @@ jobs:
         pip install build twine wheel setuptools
 
     - name: Build package
-      run: python -m build
+      run: |
+        python -m build --sdist --wheel
 
     - name: Verify package
       run: twine check dist/*
-
-    - name: Build wheels for different platforms
-      run: |
-        pip install cibuildwheel
-        python -m cibuildwheel --output-dir dist
-      env:
-        CIBW_BUILD: cp39-*
-        CIBW_SKIP: cp39-musllinux*
 
     - name: Publish to Test PyPI
       env:
